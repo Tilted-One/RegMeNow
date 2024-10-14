@@ -5,7 +5,7 @@ export default function NavigationButt(props) {
         props.setSelectedTab(option)
     }
     return (
-        <div className='flex justify-evenly mt-6 w-full'>
+        <div className='flex justify-evenly mt-6 mb-4 w-full'>
             <button className={`flex h-12 px-2 items-center rounded-2xl ${props.selectedTab !== props.email ? 'opacity-30' : ''}`} onClick={() => props.setSelectedTab('Email')} >
                 <img src={props.EmailIcon} className='mr-3'></img>
                 Email

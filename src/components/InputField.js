@@ -1,10 +1,23 @@
 import React from "react";
 import Copy from '../image/copy.svg'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function InputField(props) {
+
     function copy(event) {
-        console.log(props.inputValue)
-    }
+        if (props.inputValue) {
+            navigator.clipboard.writeText(props.inputValue)
+                .then(() => {
+                    toast.success('Copied to clipboard!');
+                })
+                .catch(error => {
+                    toast.error('Copy failed!');
+                    console.error('Copy failed:', error);
+                });
+        }
+    };
+
     return (
         <form className="flex flex-col w-full">
             <label className="text-textColor capitalize text-base mb-2 max-sm:text-sm mb-1.5">{props.labelName}</label>

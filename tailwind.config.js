@@ -10,6 +10,7 @@ module.exports = {
       blue: '#034CC0',
       inputBorderColor: '#666666',
       white: '#FFFFFF',
+      emailBorderColor: '#CAC4D0'
     }
   },
   plugins: [],

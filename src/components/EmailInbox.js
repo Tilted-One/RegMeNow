@@ -7,18 +7,30 @@ export default function EmailInbox(props) {
     const email = props.email.replace(`@`, '%40')
 
     React.useEffect(() => {
-        fetch(`https://regmenow.gtgroup.dev/main/getmessages/${email}`)
-            .then(response => response.json())
-            .then(data => setEmailInbox(data))
-            .catch(error => console.error('Fetch operation error:', error));
-    }, []);
-    
+        const fetchMessages = async () => {
+            try {
+                const response = await fetch(`https://regmenow.gtgroup.dev/main/getmessages/${email}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setEmailInbox(data);
+            } catch (error) {
+                console.error('Fetch operation error:', error);
+            }
+        };
+
+        fetchMessages();
+    }, [email]);
     return (
         <div>
-            <h1>{emailInbox.from}</h1>
-            <p>{emailInbox.subject}</p>
-            <p>{emailInbox.message}</p>
-            <p>{emailInbox.date}</p>
+            {emailInbox.map((email, index) => (
+                <div key={index} className='text-textColor px-4 py-3 border-emailBorderColor border-b-2'>
+                    <h1 className='text-lg'>{email.from}</h1>
+                    <p>{email.subject}</p>
+                    <p>{email.message}</p>
+                </div>
+            ))}
         </div>
     )
 }
