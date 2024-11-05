@@ -17,6 +17,21 @@ export default function Store() {
     const closeModal = () => {
         setIsModalOpen(false);
     }
+    React.useEffect(() => {
+        const handleEsc = (event) => {
+          if (event.key === 'Escape' && isModalOpen) {
+            closeModal();
+          }
+        };
+    
+        window.addEventListener('keydown', handleEsc);
+    
+        return () => {
+          window.removeEventListener('keydown', handleEsc);
+        };
+      }, [isModalOpen]);
+    
+    
     return (
         <div className='fixed h-auto top-0 w-full py-4 flex flex-col justify-center items-center bg-white z-50'>
             <div className='w-96 flex justify-evenly items-center '>
