@@ -9,7 +9,7 @@ export default function MobileInbox(props) {
         const fetchMessages = async () => {
             if (number && number.length > 0 && props.selectedCountry) {
                 try {
-                    const response = await fetch(`https://regmenow.gtgroup.dev/main/getInbox/${props.selectedCountry}/${number}`);
+                    const response = await fetch(`https://rmnapi.gtgroup.dev/main/getInbox/${props.selectedCountry}/${number}`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }

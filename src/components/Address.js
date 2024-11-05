@@ -31,7 +31,7 @@ export default function Address(props) {
         if (selectedCountry.length > 0 && selectedCountry != 'Choose Country') {
             setIsLoaded(true)
             try {
-                const response = await fetch(`https://regmenow.gtgroup.dev/main/getAddress/${selectedCountry}`);
+                const response = await fetch(`https://rmnapi.gtgroup.dev/main/getAddress/${selectedCountry}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

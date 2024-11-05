@@ -11,7 +11,7 @@ export default function Email(props) {
     async function fetchMail() {
         setIsLoaded(true)
         try {
-            const response = await fetch('https://regmenow.gtgroup.dev/main/getmail');
+            const response = await fetch('https://rmnapi.gtgroup.dev/main/getmail');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

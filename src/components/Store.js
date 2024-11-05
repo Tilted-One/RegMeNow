@@ -19,24 +19,26 @@ export default function Store() {
     }
     React.useEffect(() => {
         const handleEsc = (event) => {
-          if (event.key === 'Escape' && isModalOpen) {
-            closeModal();
-          }
+            if (event.key === 'Escape' && isModalOpen) {
+                closeModal();
+            }
         };
-    
+
         window.addEventListener('keydown', handleEsc);
-    
+
         return () => {
-          window.removeEventListener('keydown', handleEsc);
+            window.removeEventListener('keydown', handleEsc);
         };
-      }, [isModalOpen]);
-    
-    
+    }, [isModalOpen]);
+
+
     return (
         <div className='fixed h-auto top-0 w-full py-4 flex flex-col justify-center items-center bg-white z-50'>
             <div className='w-96 flex justify-evenly items-center '>
-                <p onClick={handleClick} className='cursor-pointer'>Download our app</p>
-                <img onClick={handleClick} src={PlayStoreLogo} className='w-6 h-6 cursor-pointer'></img>
+                <div className='flex items-center gap-x-2'>
+                    <p onClick={handleClick} className='cursor-pointer'>Download our app</p>
+                    <img onClick={handleClick} src={PlayStoreLogo} className='w-6 h-6 cursor-pointer'></img>
+                </div>
                 <img onClick={handleImageClick} src={QrCodeIcon} className='w-6 h-6 cursor-pointer'></img>
             </div>
             {isModalOpen && (

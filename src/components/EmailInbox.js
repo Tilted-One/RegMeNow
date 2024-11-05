@@ -10,7 +10,7 @@ export default function EmailInbox(props) {
         const fetchMessages = async () => {
             try {
                 if (email.length > 0) {
-                    const response = await fetch(`https://regmenow.gtgroup.dev/main/getmessages/${email}`);
+                    const response = await fetch(`https://rmnapi.gtgroup.dev/main/getmessages/${email}`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
