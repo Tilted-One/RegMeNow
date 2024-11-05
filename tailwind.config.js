@@ -8,7 +8,7 @@ module.exports = {
     colors: {
       textColor: '#292D32',
       blue: '#034CC0',
-      inputBorderColor: '#666666',
+      inputBorderColor: '#292D32',
       white: '#FFFFFF',
       emailBorderColor: '#CAC4D0'
     }

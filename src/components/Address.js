@@ -1,86 +1,74 @@
 import React from 'react'
 import InputField from './InputField'
 import GenerateButton from './GenerateButton'
-import ArrowIcon from '../image/arrow-down.svg'
+import SelectedForm from './SelectForm';
+import LoadingBar from './LoadingBar';
 
-export default function Address() {
+export default function Address(props) {
 
-    const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
     const [address, setAddress] = React.useState(null);
     const [selectedCountry, setSelectedCountry] = React.useState('')
-    const [generateAddress, setGenerateAddress] = React.useState(false)
+    const [isLoaded, setIsLoaded] = React.useState(false)
 
     const countryArray = [
-        { UnitedStates: "US" },
-        { Australia: "AU" },
-        { Canada: "CA" },
-        { Brazil: "BR" },
-        { Switzerland: "CH" },
-        { Germany: "DE" },
-        { Finland: "FI" },
-        { India: "IN" },
-        { Indonesia: "ID" },
-        { Italy: "IT" },
-        { Greece: "GR" },
-        { France: "FR" },
+        { 'United States': "US" },
+        { 'Australia': "AU" },
+        { 'Canada': "CA" },
+        { 'Brazil': "BR" },
+        { 'Switzerland': "CH" },
+        { 'Germany': "DE" },
+        { 'Finland': "FI" },
+        { 'India': "IN" },
+        { 'Indonesia': "ID" },
+        { 'Italy': "IT" },
+        { 'Greece': "GR" },
+        { 'France': "FR" },
     ]
-    React.useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-        }
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
-    React.useEffect(() => {
-        const fetchAddress = async () => {
+
+    async function fetchAddress() {
+        console.log(selectedCountry)
+        if (selectedCountry.length > 0 && selectedCountry != 'Choose Country') {
+            setIsLoaded(true)
             try {
                 const response = await fetch(`https://regmenow.gtgroup.dev/main/getAddress/${selectedCountry}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const data = await response.json();
+                const data = await response.json()
+                setIsLoaded(false)
                 setAddress(data);
             } catch (error) {
                 console.error('Fetch operation error:', error);
             }
-        };
-
-        if (generateAddress) {
-            fetchAddress();
-            setGenerateAddress(false);
         }
-    }, [generateAddress]);
+    };
+    const className = props.isMobile
+        ? 'p-6'
+        : 'py-10 px-14 w-full h-auto   border-solid border-2 rounded-2xl border-inputBorderColor mr-[220px] ml-16'
     return (
-        <div className='p-6'>
+        <div className={className}>
             <div className='flex mb-4'>
-                <select className={`h-12 w-full border-solid border-[1px] border-inputBorderColor rounded-lg outline-none appearance-none px-2  text-base text-textColor bg-white bg-no-repeat bg-right  sm:text-lg4 ${window.innerWidth > 768 ? 'mr-6' : ''}`}
-                    style={{ backgroundImage: `url(${ArrowIcon})` }}
-                    onChange={(event) => setSelectedCountry(event.target.value)}>\
-                    <option selected>Choose Country</option>
-                    {countryArray.map((country, index) => {
-                        const countryName = Object.keys(country)[0];
-                        const countryCode = country[countryName];
-                        return (
-                            <option key={index} value={countryCode}>{countryName}</option>
-                        );
-                    })}
-                </select>
-                {!isMobile && <GenerateButton buttonText='Generate' />}
+                <SelectedForm selectText='Choose Country' array={countryArray} setState={setSelectedCountry} />
+                {!props.isMobile && <div className='flex'>
+                    {isLoaded && <LoadingBar isMobile={props.isMobile} />}
+                    <GenerateButton buttonText='Generate' onClick={fetchAddress} />
+                </div>}
             </div>
             <InputField labelName='building' inputValue={address != null ? address.buildingNumber : ''} />
             <InputField labelName='streeet name' inputValue={address != null ? address.streetName : ''} />
             <InputField labelName='Street Address' inputValue={address != null ? address.streetAddress : ''} />
-            <div className='flex w-full '>
+            <div className={`flex w-full ${props.isMobile ? 'flex-col' : ''} `}>
                 <InputField labelName='State/Province' inputValue={address != null ? address.state : ''} />
                 <span className='mr-6'></span>
                 <InputField labelName='Postal Code' inputValue={address != null ? address.postalCode : ''} />
             </div>
             <InputField labelName='City' inputValue={address != null ? address.city : ''} />
 
-            {isMobile &&
-                <div className='mt-5'>
-                    <GenerateButton buttonText='Generate New Address' onClick={() => setGenerateAddress(true)} />
+            {props.isMobile &&
+                <div className='mt-2'>
+                    {isLoaded && <LoadingBar />}
+                    <GenerateButton buttonText='Generate New Address' onClick={fetchAddress} />
                 </div>
             }
         </div>
