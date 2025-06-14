@@ -1,6 +1,6 @@
 import React from "react";
 import Copy from '../image/copy.svg'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function InputField(props) {
@@ -26,7 +26,7 @@ export default function InputField(props) {
             <label className={`text-base capitalize min-w-60 mb-2`}>{props.labelName}</label>
             <div className="flex items-center mb-4">
                 <input disabled value={props.inputValue} className="h-12 w-full border-solid border-[1px] border-inputBorderColor rounded-lg outline-none mr-4 pl-2 text-base text-textColor bg-white max-sm:h-10 mr-4"></input>
-                <img src={Copy} className={classNameImg} onClick={copy}></img>
+                <img src={Copy} className={classNameImg} alt='copy' onClick={copy}></img>
             </div>
         </form>
     )

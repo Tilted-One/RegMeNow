@@ -25,10 +25,8 @@ export default function Address(props) {
         { 'France': "FR" },
     ]
 
-
     async function fetchAddress() {
-        console.log(selectedCountry)
-        if (selectedCountry.length > 0 && selectedCountry != 'Choose Country') {
+        if (selectedCountry.length > 0 && selectedCountry !== 'Choose Country') {
             setIsLoaded(true)
             try {
                 const response = await fetch(`https://rmnapi.gtgroup.dev/main/getAddress/${selectedCountry}`);
@@ -43,11 +41,8 @@ export default function Address(props) {
             }
         }
     };
-    const className = props.isMobile
-        ? 'p-6'
-        : 'py-10 px-14 w-full h-auto   border-solid border-2 rounded-2xl border-inputBorderColor mr-[220px] ml-16'
     return (
-        <div className={className}>
+        <div className={`${props.isMobile ? 'p-6' : 'py-10 px-14 w-full h-fit border-solid border-2 rounded-2xl border-inputBorderColor mr-[220px] ml-[270px]'}`}>
             <div className='flex mb-4'>
                 <SelectedForm selectText='Choose Country' array={countryArray} setState={setSelectedCountry} />
                 {!props.isMobile && <div className='flex'>
