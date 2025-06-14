@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/RegMeNow/static/css/main.7dd12287.css",
+    "main.js": "/RegMeNow/static/js/main.b454d1de.js",
+    "static/media/qrCodeIcon.jpg": "/RegMeNow/static/media/qrCodeIcon.c59ec243ca14d825deaf.jpg",
+    "static/media/qrCode.jpg": "/RegMeNow/static/media/qrCode.6298ac673fa0a67f2d34.jpg",
+    "static/media/icons8-google-play-store.svg": "/RegMeNow/static/media/icons8-google-play-store.7660dcd6b3b40be498aec2dcd032a4cf.svg",
+    "static/media/global-search.svg": "/RegMeNow/static/media/global-search.2e78c3e53eaa668bcb7c4180223e8b17.svg",
+    "static/media/copy.svg": "/RegMeNow/static/media/copy.0e328159ac08a9c657bc8033918a60cc.svg",
+    "static/media/mobile.svg": "/RegMeNow/static/media/mobile.9bc3b10f0be5b3a6342a9f7aacee472a.svg",
+    "index.html": "/RegMeNow/index.html",
+    "static/media/sms.svg": "/RegMeNow/static/media/sms.912d97efcaf555a5cbff0ff9822ebd5a.svg",
+    "static/media/arrow-down.svg": "/RegMeNow/static/media/arrow-down.bc79ca39da7d5cf1129411eeb925c412.svg",
+    "main.7dd12287.css.map": "/RegMeNow/static/css/main.7dd12287.css.map",
+    "main.b454d1de.js.map": "/RegMeNow/static/js/main.b454d1de.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7dd12287.css",
+    "static/js/main.b454d1de.js"
+  ]
+}
